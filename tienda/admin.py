@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from tienda.models import Tienda,Producto, Carrito,Items, Usuarios
+
+
+admin.site.register(Tienda)
+admin.site.register(Producto)
+admin.site.register(Carrito)
+admin.site.register(Items)
+admin.site.register(Usuarios)
