@@ -15,6 +15,7 @@ class Producto(models.Model):
 
 class Usuarios(models.Model):
     id = models.BigAutoField(primary_key=True)
+    nombre=models.CharField(max_length=255, default="")
 
 class Carrito(models.Model):
     id = models.BigAutoField(primary_key=True)
