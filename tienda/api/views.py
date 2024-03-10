@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 from tienda.models import Tienda, Producto, Usuarios, Carrito, Items
 from .serializers import TiendaSerializer, ProductoSerializer, UsuariosSerializer, CarritoSerializer, ItemsSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 class TiendaViewSet(viewsets.ModelViewSet):
     queryset = Tienda.objects.all()
@@ -21,3 +23,12 @@ class CarritoViewSet(viewsets.ModelViewSet):
 class ItemsViewSet(viewsets.ModelViewSet):
     queryset = Items.objects.all()
     serializer_class = ItemsSerializer
+
+class CarritoFilter(APIView):
+    def post(self, request):
+        carrito_filter=request.data
+        carritos=Carrito.objects.filter(**carrito_filter)
+        res=[]
+        for carrito in carritos:
+            res.append(CarritoSerializer(carrito).data)
+        return Response(res)

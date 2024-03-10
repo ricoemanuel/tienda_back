@@ -20,6 +20,7 @@ class Usuarios(models.Model):
 class Carrito(models.Model):
     id = models.BigAutoField(primary_key=True)
     usuario=models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    estado=models.BooleanField(default=False)
 
 class Items(models.Model):
     cantidad=models.IntegerField(null=True, blank=True)
