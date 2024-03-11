@@ -24,11 +24,22 @@ class ItemsViewSet(viewsets.ModelViewSet):
     queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
-class CarritoFilter(APIView):
+class ModelFilter(APIView):
+    def __init__(self, model, serializer):
+        super().__init__()
+        self.model = model
+        self.serializer = serializer
+
     def post(self, request):
-        carrito_filter=request.data
-        carritos=Carrito.objects.filter(**carrito_filter)
-        res=[]
-        for carrito in carritos:
-            res.append(CarritoSerializer(carrito).data)
+        filter_data = request.data
+        query_set = self.model.objects.filter(**filter_data)
+        res = [self.serializer(item).data for item in query_set]
         return Response(res)
+
+class CarritoFilter(ModelFilter):
+    def __init__(self):
+        super().__init__(Carrito, CarritoSerializer)
+
+class ItemsFilter(ModelFilter):
+    def __init__(self):
+        super().__init__(Items, ItemsSerializer)

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import CarritoFilter, TiendaViewSet, ProductoViewSet, UsuariosViewSet, CarritoViewSet, ItemsViewSet
+from .views import CarritoFilter, ItemsFilter, TiendaViewSet, ProductoViewSet, UsuariosViewSet, CarritoViewSet, ItemsViewSet
 
 router = routers.DefaultRouter()
 
@@ -13,4 +13,5 @@ router.register(r"items", ItemsViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("carritoFilter/", CarritoFilter.as_view()),
+    path("ItemsFilter/", ItemsFilter.as_view()),
 ]
