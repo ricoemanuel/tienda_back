@@ -24,6 +24,11 @@ class ItemsViewSet(viewsets.ModelViewSet):
     queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
+class setItem(APIView):
+    def post(self, request):
+        print("sirve")
+        return Response({})
+
 class ModelFilter(APIView):
     def __init__(self, model, serializer):
         super().__init__()
